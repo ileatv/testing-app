@@ -1,0 +1,89 @@
+.authForm {
+    display: flex;
+    position: relative;
+    width: 400px;
+    padding: 128.5px 0;
+}
+
+.authForm__fieldset {
+    border: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authForm__title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.authForm__field{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    row-gap: 12px;
+}
+
+.authForm__field:nth-child(3){
+    margin-top: 10px;
+}
+
+.authForm__label{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.authForm__input{
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 60px;
+    padding: 18px 20px;
+    border: 2px solid #3E3E3E;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    transition: 0.3s all ease-in-out;
+}
+
+.authForm__input_error{
+    border-color: #AA2020;
+}
+
+.authForm__error{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #AA2020;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.authForm__btn{
+    background-color: transparent;
+    width: 100%;
+    padding: 16px 0;
+    border: 2px solid #3E3E3E;
+    border-radius: 10px;
+    margin-top: 50px;
+    color: #3E3E3E;
+    font-weight: 500;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.authForm__btn:hover {
+    background-color: #3E3E3E;
+    color: #FBFBFB;
+}
+
+.authForm__logo{
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 80px;
+}
