@@ -21,16 +21,15 @@ import * as Yup from "yup";
 import auth from "../styles/Authorization.module.css";
 import logo from "../img/logo.png";
 
+//Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
 
-interface FormValues extends ILoginRequest {
-    username: string;
-    password: string;
-}
+//Типизация FormValues
+interface FormValues extends ILoginRequest { }
 
 //Схема валидации
 const LoginSchema = Yup.object().shape({
-    username: Yup.string().email("Некорректный email").required("Email обязателен").test({
+    username: Yup.string().email("Некорректный email").required("Email обязателен к заполнению").test({
         name: 'is-email',
         message: 'Введите корректный email',
         //Дополнительное правило валидации "test"
@@ -41,7 +40,7 @@ const LoginSchema = Yup.object().shape({
             return true;
         },
     }),
-    password: Yup.string().required("Пароль обязателен"),
+    password: Yup.string().required("Пароль обязателен к заполнению"),
 });
 
 const Authorization: FC = () => {
@@ -101,6 +100,7 @@ const Authorization: FC = () => {
                                         }`}
                                     placeholder="Email"
                                     title="Введите Email"
+                                    maxLength={254}
                                     value={formValues.username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         setFormValues({ ...formValues, username: e.target.value });
@@ -124,6 +124,7 @@ const Authorization: FC = () => {
                                         }`}
                                     placeholder="Пароль"
                                     title="Введите пароль"
+                                    maxLength={128}
                                     value={formValues.password}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         setFormValues({ ...formValues, password: e.target.value });

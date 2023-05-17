@@ -4,5 +4,5 @@ import { axiosInstance } from '../instance';
 import { AxiosPromise } from 'axios';
 
 export const login = (params: ILoginRequest): AxiosPromise<ILoginResponse> => {
-    axiosInstance.post(Endpoint.AUTH.LOGIN, params);
+    return axiosInstance.post(Endpoint.AUTH.LOGIN, params);
 }
