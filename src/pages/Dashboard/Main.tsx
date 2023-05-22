@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../store";
-import Login from "../../components/Authorization";
+import Login from "../../pages/Authorization";
 
 
 const Main = () => {

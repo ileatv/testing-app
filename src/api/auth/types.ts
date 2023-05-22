@@ -9,7 +9,7 @@ export interface ILoginResponse {
 
 export interface IPerson {
     id?: number;
-    role?: string;
+    role: string;
     username: string;
     password: string;
     lastName: string;
