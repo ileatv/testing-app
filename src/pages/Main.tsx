@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 //Styles and images
 import main from '../styles/Main.module.css';
 import Image from 'next/image';
-import logo from "../img/logo.png";
+import logo from "../assets/img/logo.png";
 
 const Main: FC = () => {
     const router = useRouter();

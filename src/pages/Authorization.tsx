@@ -23,8 +23,8 @@ import { ILoginRequest } from '../api/auth/types';
 import * as Yup from "yup";
 
 //Styles and images
-import auth from "../styles/Authorization.module.css";
-import logo from "../img/logo.png";
+import auth from "../styles/Auth&Reg/Authorization.module.css";
+import logo from "../assets/img/logo.png";
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;

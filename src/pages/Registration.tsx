@@ -15,7 +15,7 @@ import { IPerson } from '../api/auth/types';
 import * as Yup from 'yup';
 
 //Styles and images
-import reg from '../styles/Registration.module.css';
+import reg from '../styles/Auth&Reg/Registration.module.css';
 import axios from 'axios';
 
 //Типизация setSubmitting

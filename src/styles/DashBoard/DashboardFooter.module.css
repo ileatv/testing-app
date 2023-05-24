@@ -1,0 +1,37 @@
+.footer{
+    background-color: var(--bg-color);
+}
+
+.footer__content{
+    background-color: transparent;
+}
+
+.footer__link{
+    position: relative;
+    display: inline-block;
+    color: var(--blue);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s all ease-in-out;
+}
+
+.footer__link:hover{
+    color: var(--blue);
+}
+
+.footer__link:before {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: var(--blue);
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    transition: 0.3s all ease-in-out;
+}
+
+.footer__link:hover::before {
+    width: 100%;
+}

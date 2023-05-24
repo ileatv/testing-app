@@ -1,11 +1,15 @@
+//CoreUI components
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavbarNav, CNavItem, CNavLink, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CDropdownDivider, CForm, CFormInput, CButton, CAvatar, CLink } from '@coreui/react';
+
+//React components
 import { FC, useState } from "react";
+
 //Next components
 import { useRouter } from 'next/router';
 
 //Styles and images
-import dashHeader from '../../styles/DashboardHeader.module.css';
+import dashHeader from '../../styles/Dashboard/DashboardHeader.module.css';
 
 const DashboardHeader: FC = () => {
     const [visible, setVisible] = useState(false);
@@ -41,12 +45,14 @@ const DashboardHeader: FC = () => {
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false}>
-                                    <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
-                                    <CDropdownMenu>
-                                        <CDropdownItem href="#">Action</CDropdownItem>
-                                        <CDropdownItem href="#">Another action</CDropdownItem>
-                                        <CDropdownDivider />
-                                        <CDropdownItem href="#">Something else here</CDropdownItem>
+                                    <CDropdownToggle className={dashHeader.nav__btn}>Dropdown button</CDropdownToggle>
+
+                                    <CDropdownMenu className={dashHeader.dropdownList}>
+                                        <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Action</CDropdownItem>
+                                        {/* <CDropdownDivider className={dashHeader.dropdownList__divider} /> */}
+                                        <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Another action</CDropdownItem>
+                                        <CDropdownDivider className={dashHeader.dropdownList__divider} />
+                                        <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Something else here</CDropdownItem>
                                     </CDropdownMenu>
                                 </CDropdown>
 
@@ -60,16 +66,17 @@ const DashboardHeader: FC = () => {
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false} className={dashHeader.user}>
-                                    <CDropdownToggle onClick={toggle}>
+                                    <CDropdownToggle onClick={toggle} className={dashHeader.nav__btn}>
                                         <CAvatar status="success" className={dashHeader.user__avatar}>ADM</CAvatar>
                                     </CDropdownToggle>
-                                    <CDropdownMenu className={dashHeader.user__list}>
-                                        <CDropdownItem className={dashHeader.user__item} title='Перейти к профилю пользователя'>
+
+                                    <CDropdownMenu className={dashHeader.dropdownList}>
+                                        <CDropdownItem className={dashHeader.dropdownList__item} title='Перейти к профилю пользователя'>
                                             Профиль
                                         </CDropdownItem>
-                                        <CDropdownDivider className={dashHeader.user__divider} />
-                                        <CDropdownItem className={dashHeader.user__item}>
-                                            <CButton type="button" className={dashHeader.user__btn} title='Выйти из аккаунта'>
+                                        <CDropdownDivider className={dashHeader.dropdownList__divider} />
+                                        <CDropdownItem className={dashHeader.dropdownList__item}>
+                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта'>
                                                 Выйти
                                             </CButton>
                                         </CDropdownItem>
