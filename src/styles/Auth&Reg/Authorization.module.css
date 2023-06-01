@@ -12,13 +12,14 @@
     align-items: center;
     justify-content: center;
     width: 1400px;
-    padding: 130.5px 0;
+    padding: 128.5px 0;
     margin: auto 0;
     background-color: #FBFBFB;
     border-radius: 24px;
 }
 
 .authForm__fieldset {
+    position: relative;
     border: none;
     width: 100%;
     width: 400px;
@@ -39,11 +40,8 @@
     display: flex;
     flex-direction: column;
     padding-top: 25px;
-    row-gap: 12px;
-}
-
-.authForm__field:nth-child(3){
     margin-top: 10px;
+    row-gap: 12px;
 }
 
 .authForm__label{
@@ -98,14 +96,81 @@
     transition: 0.3s all ease-in-out;
 }
 
-.authForm__btn:hover {
+.authForm__btn:hover,
+.authForm__btn:focus {
     background-color: var(--dark-gray);
     color: var(--white);
+}
+
+.authForm__picture{
+    max-width: 200px;
+    max-height: 230px;
+    margin-bottom: 80px;
 }
 
 .authForm__logo{
     display: block;
     width: 100%;
-    max-width: 200px;
-    margin-bottom: 80px;
+    height: 100%;
+}
+
+.authForm__errorField{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 270px;
+    /* left: 0; */
+}
+
+.authForm__errorMessage{
+    color: var(--red);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.authForm__nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.authForm__linkText{
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.authForm__link{
+    position: relative;
+    color: var(--link-color-blue);
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s all ease-in-out;
+}
+
+.authForm__link:hover,
+.authForm__link:focus {
+    color: var(--link-hover);
+}
+
+.authForm__link:before {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: var(--link-hover);
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    transition: 0.3s all ease-in-out;
+}
+
+.authForm__link:hover::before,
+.authForm__link:focus::before {
+    width: 100%;
 }

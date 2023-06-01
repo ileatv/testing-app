@@ -1,12 +1,12 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import api from '../../api';
 import { ILoginRequest, ILoginResponse } from '../../api/auth/types';
-// import { loginStart, loginSucess, loginFailure } from './authReducer';
 import { loginStart, loginSucess, loginFailure, logoutSuccess, loadProfileStart, loadProfileFailure, loadProfileSucess } from "./authReducer"
-// import { history } from '../../utils/history'
-// import { store } from ".."
-// import { AxiosPromise } from "axios"
-// import { isTokenExpired } from "../../utils/jwt"
+// import { history } from '../../utils/history';
+import { store } from ".."
+import { AxiosPromise } from "axios"
+import { isTokenExpired } from "../../utils/jwt"
+import { useRouter } from 'next/router';
 
 //асинхронная функция в которой отправляется запрос на логин
 export const loginUser =
@@ -17,29 +17,48 @@ export const loginUser =
 
                 const res = await api.auth.login(data)
 
+                //Если логирование прошло успешно, то передаём в редьюсер access токен
                 dispatch(loginSucess(res.data.accessToken))
-                // dispatch(getProfile())
+
+                // dispatch(getProfile() as any)
 
             } catch (e: any) {
                 console.error(e)
 
+                if (e.response && e.response.status === 401) {
+                    const errorMessage = 'Неверный логин или пароль';
+                    console.log(errorMessage);
+                } else {
+                    const errorMessage = 'Произошла ошибка при выполнении запроса';
+                    console.log(errorMessage);
+                }
+
                 dispatch(loginFailure(e.message))
+
+                const router = useRouter();
+
+                if (router !== null) {
+                    await router.push('/Authorization');
+                }
             }
         }
 
-// export const logoutUser =
-//     () =>
-//         async (dispatch: Dispatch): Promise<void> => {
-//             try {
-//                 await api.auth.logout()
+export const logoutUser = () =>
+    async (dispatch: Dispatch): Promise<void> => {
+        try {
+            await api.auth.logout()
 
-//                 dispatch(logoutSuccess())
+            dispatch(logoutSuccess())
 
-//                 history.push('/')
-//             } catch (e) {
-//                 console.error(e)
-//             }
-//         }
+            const router = useRouter();
+
+            if (router !== null) {
+                await router.push('/');
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
 // export const getProfile = () =>
 //     async (dispatch: Dispatch<any>): Promise<void> => {

@@ -1,9 +1,10 @@
 //React components
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 //Next components
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Link from 'next/link';
 
 //Formik components
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -25,7 +26,7 @@ type SetSubmitting = (isSubmitting: boolean) => void;
 interface FormValues extends IPerson { }
 
 const Registration: FC = () => {
-    const [registrationError, setRegistrationError] = useState('');
+    // const [registrationError, setRegistrationError] = useState('');
 
     const [formValues, setFormValues] = useState<FormValues>({
         role: 'role_student',
@@ -55,35 +56,17 @@ const Registration: FC = () => {
             .required('Пароль обязателен к заполнению')
             .matches(
                 /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
-                'Пароль должен содержать не менее 8 символов, включая как минимум одну заглавную букву и одну цифру'
+                'Пароль должен содержать не менее 8 символов, включая как минимум одну заглавную букву, цифру и специальный символ'
             ),
         lastName: Yup.string().required("Фамилия обязательна к заполнению"),
         firstName: Yup.string().required("Имя обязательно к заполнению"),
         patronymic: Yup.string().required("Отчество обязательно к заполнению"),
         courseId: Yup.string()
             .required("№ курса обязателен к заполнению")
-            .matches(/^[1-4]$/, '№ курса должен быть в диапазонеот 1 до 4'),
+            .matches(/^[1-4]$/, '№ курса должен быть в диапазоне от 1 до 4'),
     });
 
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
-        // try {
-        //     const response = await fetch('/api/register', {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify(values),
-        //     });
-
-        //     if (response.ok) {
-        //         console.log('Registration successful!');
-        //     } else {
-        //         setRegistrationError('Registration failed!');
-        //     }
-        // } catch (error) {
-        //     console.error('Error registering user:', error);
-        //     setRegistrationError('Error registering user');
-        // } finally {
-        //     setSubmitting(false);
-        // }
 
         setTimeout(() => {
             //Преобразуем приходящий объект в строку JSON
@@ -95,24 +78,21 @@ const Registration: FC = () => {
             setSubmitting(false);
         }, 400);
 
-        // await fetch('https://api.pfctngr.ru/', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(values),
-        // });
-
         try {
-            const response = await axios.post('https://api.pfctngr.ru/', values, {
+            const response = await axios.post('https://api.pfctngr.ru/register', values, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            return response.data;
+
+            console.log('Success');
+
+            await router.push('/Authorization');
+            return console.log(response.data);
         } catch (error) {
             console.error(error);
         }
 
-        await router.push('/Authorization');
     };
 
     return (
@@ -253,15 +233,22 @@ const Registration: FC = () => {
                                     />
                                 </div>
 
-                                <button type="submit" disabled={isSubmitting} className={reg.regForm__btn} title='Зарегистрировать пользователя'>
+                                <button type="submit" disabled={isSubmitting} className={reg.regForm__btn} title='Зарегистрировать аккаунт'>
                                     Зарегистрироваться
                                 </button>
+
+                                <nav className={reg.regForm__nav}>
+                                    <span className={reg.regForm__linkText}>Уже есть учетная запись? </span>
+                                    <Link href="/Authorization" className={reg.regForm__link} title='Перейти на страницу авторизации'>
+                                        Войдите в свой аккаунт, чтобы продолжить
+                                    </Link>
+                                </nav>
                             </fieldset>
                         </Form>
                     </main>
                 )}
             </Formik>
-            {registrationError && <p>{registrationError}</p>}
+            {/* {registrationError && <p>{registrationError}</p>} */}
         </>
     );
 };

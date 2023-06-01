@@ -1,12 +1,16 @@
+//ReduxToolkit components
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+//Описываем интерфейс для редьюсера (слайсера)
 export interface AuthState {
-    //Хранение acces токена при авторизации, если токен заполнен, то пользователь авторизован
+    //Хранение access токена при авторизации, если токен заполнен, то пользователь авторизован
     authData: {
         accessToken: string | null
         isLoading: boolean
         error: string | null,
     }
+
+    //Для профиля описываем всё тоже самое
     profileData: {
         profile: string | null,
         isLoading: boolean
@@ -20,6 +24,7 @@ const initialState: AuthState = {
         isLoading: false,
         error: null,
     },
+
     profileData: {
         profile: null,
         isLoading: false,
@@ -27,6 +32,7 @@ const initialState: AuthState = {
     }
 }
 
+//Создание редьюсера
 export const authReducer = createSlice({
     name: 'auth',
     //Передаем начальное состояние
@@ -81,10 +87,13 @@ export const authReducer = createSlice({
                 error: action.payload,
             }
         }),
+        //Описание logout'a, просто описываем его начальное состояние
         logoutSuccess: (): AuthState => initialState,
     },
 })
 
+//Все эти функции из экшенов можем передать, чтобы не делать никакие переменные
 export const { loadProfileStart, loadProfileSucess, loadProfileFailure, loginStart, loginSucess, loginFailure, logoutSuccess } = authReducer.actions
 
+//Возвращаем редьюсер
 export default authReducer.reducer

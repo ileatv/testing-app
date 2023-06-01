@@ -19,6 +19,28 @@ const DashboardHeader: FC = () => {
 
     const toggle = () => setIsOpen(!isOpen);
 
+    const handleLogout = async () => {
+        // // Получаем access и refresh токены из cookies или localStorage
+        // const accessToken = Cookies.get('access_token') || localStorage.getItem('access_token');
+        // const refreshToken = Cookies.get('refresh_token') || localStorage.getItem('refresh_token');
+
+        // // Проверяем, существуют ли токены
+        // if (accessToken || refreshToken) {
+        //     // Удаляем токены
+        //     Cookies.remove('access_token');
+        //     Cookies.remove('refresh_token');
+        //     localStorage.removeItem('access_token');
+        //     localStorage.removeItem('refresh_token');
+
+        //     // Делаем запрос на сервер для удаления токенов
+        //     // ...
+
+        //     // Перенаправляем пользователя на страницу входа
+        //     window.location.href = '/login';
+        // }
+        await router.push('/Authorization');
+    }
+
     return (
         <>
             <header className={dashHeader.header}>
@@ -33,19 +55,19 @@ const DashboardHeader: FC = () => {
                                 </CNavbarBrand>
 
                                 <CNavItem>
-                                    <CNavLink href="/Dashboard/Dashboard" active={router.pathname === '/Dashboard/Dashboard'} title='Перейти на главную' className={dashHeader.nav__link}>
+                                    <CNavLink href="/Dashboard/Dashboard" active={router.pathname === '/Dashboard/Dashboard'} title='Перейти на главную' className={`${dashHeader.nav__link} ${dashHeader.nav__link_active} ${router.pathname === '/Dashboard/Dashboard' ? 'active' : `${dashHeader.nav__link}`}`}>
                                         Главная
                                     </CNavLink>
                                 </CNavItem>
 
                                 <CNavItem>
-                                    <CNavLink href="/Dashboard/Users" active={router.pathname === '/Users'} title='Перейти к списку пользователей' className={dashHeader.nav__link}>
+                                    <CNavLink href="/Dashboard/Users" active={router.pathname === '/Users'} title='Перейти к таблице пользователей' className={dashHeader.nav__link}>
                                         Пользователи
                                     </CNavLink>
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false}>
-                                    <CDropdownToggle className={dashHeader.nav__btn}>Dropdown button</CDropdownToggle>
+                                    <CDropdownToggle className={dashHeader.nav__link}>Dropdown button</CDropdownToggle>
 
                                     <CDropdownMenu className={dashHeader.dropdownList}>
                                         <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Action</CDropdownItem>
@@ -66,7 +88,7 @@ const DashboardHeader: FC = () => {
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false} className={dashHeader.user}>
-                                    <CDropdownToggle onClick={toggle} className={dashHeader.nav__btn}>
+                                    <CDropdownToggle onClick={toggle} className={dashHeader.nav__link}>
                                         <CAvatar status="success" className={dashHeader.user__avatar}>ADM</CAvatar>
                                     </CDropdownToggle>
 
@@ -76,7 +98,7 @@ const DashboardHeader: FC = () => {
                                         </CDropdownItem>
                                         <CDropdownDivider className={dashHeader.dropdownList__divider} />
                                         <CDropdownItem className={dashHeader.dropdownList__item}>
-                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта'>
+                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта' onClick={handleLogout}>
                                                 Выйти
                                             </CButton>
                                         </CDropdownItem>

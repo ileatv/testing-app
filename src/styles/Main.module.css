@@ -37,16 +37,20 @@
     transition: 0.3s all ease-in-out;
 }
 
-.nav__link:hover{
+.nav__link:hover,
+.nav__link:focus{
     background-color: var(--dark-gray);
     color: var(--white);
 }
 
-.nav__logo{
-    display: block;
-    width: 100%;
+.nav__picture {
     max-width: 200px;
     margin-bottom: 80px;
+}
+
+.nav__logo {
+    display: block;
+    width: 100%;
 }
 
 .nav__divider{

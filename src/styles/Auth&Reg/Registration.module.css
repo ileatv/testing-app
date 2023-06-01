@@ -104,7 +104,8 @@
     transition: 0.3s all ease-in-out;
 }
 
-.regForm__btn:hover {
+.regForm__btn:hover,
+.regForm__btn:focus {
     background-color: var(--dark-gray);
     color: var(--white);
 }
@@ -114,4 +115,50 @@
     width: 100%;
     max-width: 200px;
     margin-bottom: 80px;
+}
+
+.regForm__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.regForm__linkText {
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.regForm__link {
+    position: relative;
+    color: var(--link-color-blue);
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s all ease-in-out;
+}
+
+.regForm__link:hover,
+.regForm__link:focus {
+    color: var(--link-hover);
+}
+
+.regForm__link:before {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: var(--link-hover);
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    transition: 0.3s all ease-in-out;
+}
+
+.regForm__link:hover::before,
+.regForm__link:focus::before {
+    width: 100%;
 }

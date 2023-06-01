@@ -1,6 +1,7 @@
+//Конечные роуты
 const endpoints = {
     AUTH: {
-        LOGIN: '/login',
+        LOGIN: '/authenticate',
         PROFILE: '/profile',
         LOGOUT: '/logout',
         REFRESH: '/refresh',

@@ -29,16 +29,31 @@
   --green-light: #52C73F;
   --yelow: #C7C13F;
   --blue: #3399FF;
+  --blue-dark: #007AFF;
+  --blue-light: #7acfd6;
   --light-gray: #979797;
   --marble: #ECE9F2;
+  --dark-blue: #252850;
 
   --focus-color: var(--marble);
+
+  --text-color-white: var(--white);
   --text-color: var(--dark-gray);
-  --link-color: var(--blue);
+
+  --link-color: var(--blue-light);
+  --link-color-blue: var(--blue);
+  --link-hover: var(--blue-dark);
+
   --input-focus: var(--blue);
+  --input-focus-light: var(--blue-light);
+
+  --border-color-white: var(--white);
 
   --bg-color: var(--white);
   --bg-gradient: linear-gradient(to right, #414345, #232526);
+
+  --text-size: 1rem;
+  --h1-size: 2rem;
 
   --max-width: 1400px;
 }

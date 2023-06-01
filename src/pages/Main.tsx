@@ -1,6 +1,9 @@
 //React components
 import { FC, useEffect } from 'react';
 
+//Next components
+import Head from 'next/head';
+
 //Pages
 import Authorization from './Authorization';
 import Registration from './Registration';
@@ -11,26 +14,45 @@ import { useRouter } from 'next/router';
 
 //Styles and images
 import main from '../styles/Main.module.css';
-import Image from 'next/image';
+
+import logoWebp from "../assets/img/logo.webp";
+import logoWebp2x from "../assets/img/logo2x.webp";
 import logo from "../assets/img/logo.png";
+import logo2x from "../assets/img/logo2x.png";
 
 const Main: FC = () => {
     const router = useRouter();
 
     return (
         <>
+            <Head>
+                <title>Testing App - Главная</title>
+            </Head>
+
             <section className={main.content}>
                 <nav className={main.nav}>
-                    <Image
-                        src={logo}
-                        alt="TestingApp logo"
-                        className={main.nav__logo}
-                    />
-                    <Link href='/Authorization' className={main.nav__link} title='Войти в аккаунт'>
+                    <picture className={main.nav__picture}>
+                        <source
+                            srcSet={`${logoWebp.src} 1x,
+                                     ${logoWebp2x.src} 2x`}
+                            type="image/webp"
+                        />
+
+                        <img
+                            src={logo.src}
+                            srcSet={`${logo2x.src} 2x`}
+                            alt="TestingApp - логотип"
+                            className={main.nav__logo}
+                        />
+                    </picture>
+
+                    <Link href='/Authorization' className={main.nav__link} title='Перейти на страницу авторизации'>
                         Войти
                     </Link>
+
                     <span className={main.nav__divider}>или</span>
-                    <Link href='/Registration' className={main.nav__link} title='Зарегистрировать аккаунт'>
+
+                    <Link href='/Registration' className={main.nav__link} title='Перейти на страницу регистрации'>
                         Зарегистрироваться
                     </Link>
                 </nav>

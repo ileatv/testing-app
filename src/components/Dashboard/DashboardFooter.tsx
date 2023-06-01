@@ -11,14 +11,14 @@ const DashboardFooter: FC = () => {
     return (
         <footer className={dashFooter.footer}>
             <CFooter className={dashFooter.footer__content}>
-                <div>
+                <div className={dashFooter.footer__group}>
                     <CLink href="https://coreui.io" className={dashFooter.footer__link}>
                         TestingApp
                     </CLink>
                     <span> &copy;2023 TestingApp.</span>
                 </div>
-                <div>
-                    <span>Powered by </span>
+                <div className={dashFooter.footer__group}>
+                    <span>Powered by&nbsp;</span>
                     <CLink href="https://coreui.io" className={dashFooter.footer__link}>
                         CoreUI
                     </CLink>
