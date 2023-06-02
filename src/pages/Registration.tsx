@@ -19,6 +19,9 @@ import * as Yup from 'yup';
 import reg from '../styles/Auth&Reg/Registration.module.css';
 import axios from 'axios';
 
+//Pages
+import Authorization from '@/pages/Authorization';
+
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
 
@@ -249,6 +252,8 @@ const Registration: FC = () => {
                 )}
             </Formik>
             {/* {registrationError && <p>{registrationError}</p>} */}
+
+            {/* {router.pathname === '/Authorization' && <Authorization />} */}
         </>
     );
 };

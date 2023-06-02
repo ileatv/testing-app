@@ -11,7 +11,7 @@ export const refreshToken = (): AxiosPromise<ILoginResponse> => axiosInstance.ge
 
 export const logout = (): AxiosPromise<void> => {
     // return axiosInstance.get(Endpoints.AUTH.LOGOUT);
-    const url = Endpoints.AUTH.LOGOUT + `?_=${Math.random()}`;
+    const url = Endpoints.AUTH.LOGOUT; //+ `?_=${Math.random()}`
     return axiosInstance.get(url);
 }
 

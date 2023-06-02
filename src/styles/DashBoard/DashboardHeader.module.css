@@ -18,7 +18,12 @@
     border-right: 2px solid var(--border-color-white);
     font-weight: 600;
     color: var(--blue-light);
-    pointer-events: none;
+    transition: 0.3s all ease-in-out;
+}
+
+.nav__brand:hover,
+.nav__brand:focus{
+    color: var(--blue);
 }
 
 .nav__link{
@@ -33,7 +38,8 @@
     color: var(--link-color) !important;
 }
 
-.nav__link:hover{
+.nav__link:hover,
+.nav__link:focus{
     color: var(--link-color);
 }
 
@@ -115,6 +121,7 @@
     border-color: var(--blue-light) !important;
     background-color: var(--dark-blue) !important;
     color: var(--link-color) !important;
+    outline: none !important;
 }
 
 .dropdownList{
@@ -152,11 +159,12 @@
 }
 
 .user__avatar{
-    background-color: var(--dark-gray);
+    background-color: var(--white);
     width: 38px;
     height: 38px;
     font-size: 0.75rem;
-    color: var(--white);
+    font-weight: 600;
+    color: var(--dark-gray);
 }
 
 .user__btn{
@@ -173,6 +181,8 @@
 .user__btn:active,
 .user__btn:hover
 {
+    outline: transparent !important;
+    background: transparent !important;
     background-color: transparent !important;
     color: var(--blue) !important;
 }

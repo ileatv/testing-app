@@ -1,7 +1,5 @@
 import { FC } from 'react';
 import Head from 'next/head';
-import { RouterProvider, BrowserRouter, Link, Routes, Route } from 'react-router-dom';
-import Main from '../pages/Main';
 
 type Props = {
     children: React.ReactNode;

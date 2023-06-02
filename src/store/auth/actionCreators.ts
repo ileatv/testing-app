@@ -7,11 +7,13 @@ import { store } from ".."
 import { AxiosPromise } from "axios"
 import { isTokenExpired } from "../../utils/jwt"
 import { useRouter } from 'next/router';
+import axios, { AxiosError } from 'axios';
+
 
 //асинхронная функция в которой отправляется запрос на логин
 export const loginUser =
     (data: ILoginRequest) =>
-        async (dispatch: Dispatch): Promise<void> => {
+        async (dispatch: Dispatch): Promise<void | string> => {
             try {
                 dispatch(loginStart())
 
@@ -21,17 +23,12 @@ export const loginUser =
                 dispatch(loginSucess(res.data.accessToken))
 
                 // dispatch(getProfile() as any)
+                // return 'NO ERROR'
+                // const errorMessage = 'undefined'
+                // return errorMessage
 
             } catch (e: any) {
                 console.error(e)
-
-                if (e.response && e.response.status === 401) {
-                    const errorMessage = 'Неверный логин или пароль';
-                    console.log(errorMessage);
-                } else {
-                    const errorMessage = 'Произошла ошибка при выполнении запроса';
-                    console.log(errorMessage);
-                }
 
                 dispatch(loginFailure(e.message))
 
@@ -40,6 +37,38 @@ export const loginUser =
                 if (router !== null) {
                     await router.push('/Authorization');
                 }
+
+                if (e.response && e.response.status === 401) {
+                    const errorMessage = 'Неверный логин или пароль';
+                    console.log(errorMessage);
+                    console.log(e.response);
+                    return errorMessage;
+
+                } else {
+                    const errorMessage = 'Произошла ошибка при выполнении запроса';
+                    console.log(errorMessage);
+                    console.log(e.response);
+                    return errorMessage;
+                }
+
+                // if (axios.isAxiosError(e)) {
+                //     if (e.response && e.response.status === 401) {
+                //         const errorMessage = 'Неверный логин или пароль';
+                //         console.log(errorMessage);
+                //         console.log(e.response);
+                //         // return errorMessage;
+                //     } else {
+                //         const errorMessage = 'Произошла ошибка при выполнении запроса';
+                //         console.log(errorMessage);
+                //         console.log(e.response);
+                //         // return errorMessage;
+                //     }
+                // } else {
+                //     const errorMessage = 'Произошла неизвестная ошибка';
+                //     console.log(errorMessage);
+                //     console.log(e);
+                //     // return errorMessage;
+                // }
             }
         }
 
@@ -50,11 +79,11 @@ export const logoutUser = () =>
 
             dispatch(logoutSuccess())
 
-            const router = useRouter();
+            // const router = useRouter();
 
-            if (router !== null) {
-                await router.push('/');
-            }
+            // if (router !== null) {
+            //     await router.push('/');
+            // }
         } catch (e) {
             console.error(e)
         }

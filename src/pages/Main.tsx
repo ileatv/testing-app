@@ -1,15 +1,13 @@
 //React components
 import { FC, useEffect } from 'react';
 
-//Next components
-import Head from 'next/head';
-
 //Pages
 import Authorization from './Authorization';
 import Registration from './Registration';
 
 //Next components
 import Link from 'next/link';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 //Styles and images
@@ -29,7 +27,7 @@ const Main: FC = () => {
                 <title>Testing App - Главная</title>
             </Head>
 
-            <section className={main.content}>
+            <main className={main.content}>
                 <nav className={main.nav}>
                     <picture className={main.nav__picture}>
                         <source
@@ -56,7 +54,7 @@ const Main: FC = () => {
                         Зарегистрироваться
                     </Link>
                 </nav>
-            </section>
+            </main>
 
             {router.pathname === '/Authorization' && <Authorization />}
             {router.pathname === '/Registration' && <Registration />}

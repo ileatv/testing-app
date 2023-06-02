@@ -9,16 +9,6 @@ import { IRootState, useAppDispatch } from "../store";
 
 const Home: FC = () => {
 
-  const isLoggedIn = useSelector(
-    (state: IRootState) => !!state.auth.authData.accessToken
-  );
-
-  const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getProfile());
-  // }, [dispatch]);
-
   return (
     <>
       <Layout>

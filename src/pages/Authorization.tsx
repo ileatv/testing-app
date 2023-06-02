@@ -19,6 +19,9 @@ import { ILoginRequest } from '../api/auth/types';
 //Validation
 import * as Yup from "yup";
 
+//Pages
+import Dashboard from './Dashboard/Dashboard';
+
 //Styles and images
 import auth from "../styles/Auth&Reg/Authorization.module.css";
 
@@ -26,7 +29,7 @@ import logoWebp from "../assets/img/logo.webp";
 import logoWebp2x from "../assets/img/logo2x.webp";
 import logo from "../assets/img/logo.png";
 import logo2x from "../assets/img/logo2x.png";
-import { compose } from '@reduxjs/toolkit';
+// import { compose } from '@reduxjs/toolkit';
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
@@ -63,7 +66,7 @@ const Authorization: FC = () => {
     });
 
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
-        setError('');
+        // setError('');
 
         setSubmitting(true);
         // setTimeout(() => {
@@ -76,21 +79,52 @@ const Authorization: FC = () => {
         //     // setSubmitting(false);
         // }, 400);
 
+        // try {
+        //     await dispatch(loginUser(values));
+
+        //     await router.push('/Dashboard/Dashboard');
+        // } catch (error: any) {
+        //     console.log(error.response);
+
+        //     if (error.response && error.response.status === 401) {
+        //         console.log('1');
+        //         setError('Ошибка: неверный логин или пароль');
+
+        //         // else {
+        //         //     setError('Ошибка: токен доступа устарел или неактивен');
+        //         // }
+        //     } else {
+        //         console.log('2');
+
+        //         setError('Ошибка: не удалось выполнить вход');
+        //     }
+        // }
+
         try {
+            // const errorMessage = await dispatch(loginUser(values)); // Получаем errorMessage из loginUser
+            // if (errorMessage !== undefined) {
+            //     setError('Произошла ошибка при выполнении запроса'); // Устанавливаем ошибку, если она есть
+            // } else {
             await dispatch(loginUser(values));
+
+            // const errorMessage = await dispatch(loginUser(values)); // Получаем errorMessage из loginUser
+            // if (errorMessage !== undefined) {
+            //     setError('Произошла ошибка при выполнении запроса'); // Устанавливаем ошибку, если она есть
+            // } else {
+
             await router.push('/Dashboard/Dashboard');
+            // }
         } catch (error: any) {
-            if (error.response && error.response.status === 401) {
-                setError('Ошибка: не удалось выполнить вход');
-                // else {
-                //     setError('Ошибка: токен доступа устарел или неактивен');
-                // }
-            } else {
+            console.log(error.response);
+            if (error.response && error.response.status) {
                 setError('Ошибка: неверный логин или пароль');
             }
+            else {
+                setError('Произошла ошибка при выполнении запроса');
+            }
+        } finally {
+            setSubmitting(false);
         }
-
-        setSubmitting(false);
     };
 
     return (
@@ -204,6 +238,8 @@ const Authorization: FC = () => {
                     </main>
                 )}
             </Formik >
+
+            {/* {router.pathname === '/Dashboard/Dashboard' && <Dashboard />} */}
         </>
     )
 }

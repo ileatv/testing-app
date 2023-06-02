@@ -11,35 +11,17 @@ import { useRouter } from 'next/router';
 //Styles and images
 import dashHeader from '../../styles/Dashboard/DashboardHeader.module.css';
 
-const DashboardHeader: FC = () => {
+interface DashboardHeaderProps {
+    logout: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+}
+
+const DashboardHeader: FC<DashboardHeaderProps> = ({ logout }) => {
     const [visible, setVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
     const router = useRouter();
 
     const toggle = () => setIsOpen(!isOpen);
-
-    const handleLogout = async () => {
-        // // Получаем access и refresh токены из cookies или localStorage
-        // const accessToken = Cookies.get('access_token') || localStorage.getItem('access_token');
-        // const refreshToken = Cookies.get('refresh_token') || localStorage.getItem('refresh_token');
-
-        // // Проверяем, существуют ли токены
-        // if (accessToken || refreshToken) {
-        //     // Удаляем токены
-        //     Cookies.remove('access_token');
-        //     Cookies.remove('refresh_token');
-        //     localStorage.removeItem('access_token');
-        //     localStorage.removeItem('refresh_token');
-
-        //     // Делаем запрос на сервер для удаления токенов
-        //     // ...
-
-        //     // Перенаправляем пользователя на страницу входа
-        //     window.location.href = '/login';
-        // }
-        await router.push('/Authorization');
-    }
 
     return (
         <>
@@ -71,7 +53,6 @@ const DashboardHeader: FC = () => {
 
                                     <CDropdownMenu className={dashHeader.dropdownList}>
                                         <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Action</CDropdownItem>
-                                        {/* <CDropdownDivider className={dashHeader.dropdownList__divider} /> */}
                                         <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Another action</CDropdownItem>
                                         <CDropdownDivider className={dashHeader.dropdownList__divider} />
                                         <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Something else here</CDropdownItem>
@@ -81,14 +62,14 @@ const DashboardHeader: FC = () => {
                                 <CNavItem>
                                     <CForm className={dashHeader.search}>
                                         <CFormInput type="search" className={dashHeader.search__input} placeholder="Поиск" title='Введите запрос' />
-                                        <CButton type="submit" color="success" variant="outline" title='Найти по запросу' className={dashHeader.search__btn}>
+                                        <CButton type="submit" title='Найти по запросу' className={dashHeader.search__btn}>
                                             Найти
                                         </CButton>
                                     </CForm>
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false} className={dashHeader.user}>
-                                    <CDropdownToggle onClick={toggle} className={dashHeader.nav__link}>
+                                    <CDropdownToggle onClick={toggle} className={dashHeader.nav__link} title='Раскрыть меню пользователя'>
                                         <CAvatar status="success" className={dashHeader.user__avatar}>ADM</CAvatar>
                                     </CDropdownToggle>
 
@@ -98,7 +79,7 @@ const DashboardHeader: FC = () => {
                                         </CDropdownItem>
                                         <CDropdownDivider className={dashHeader.dropdownList__divider} />
                                         <CDropdownItem className={dashHeader.dropdownList__item}>
-                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта' onClick={handleLogout}>
+                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта' onClick={logout}>
                                                 Выйти
                                             </CButton>
                                         </CDropdownItem>
