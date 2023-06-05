@@ -1,6 +1,11 @@
+//Redux Toolkit
 import { configureStore } from '@reduxjs/toolkit';
+
+//Redux
 import { useDispatch } from 'react-redux';
 import logger from 'redux-logger';
+
+//AuthReducer
 import authReducer from './auth/authReducer';
 
 export const store = configureStore({

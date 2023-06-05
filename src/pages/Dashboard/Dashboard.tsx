@@ -29,6 +29,7 @@ import { logoutUser } from '@/store/auth/actionCreators'; //getProfile,
 
 //Styles
 import dash from '../../styles/DashBoard/Dashboard.module.css';
+import axios from 'axios';
 
 
 const Dashboard: FC = () => {
@@ -47,13 +48,8 @@ const Dashboard: FC = () => {
     const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        try {
+        await dispatch(logoutUser());
 
-            await dispatch(logoutUser());
-
-        } catch (error) {
-            console.error(error);
-        }
     };
 
     const renderProfile = (): React.ReactNode => {

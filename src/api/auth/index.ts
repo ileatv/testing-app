@@ -1,6 +1,13 @@
+//Endpoints
 import Endpoints from '../endpoints';
+
+//Types
 import { ILoginRequest, ILoginResponse } from './types';
+
+//Instances
 import { axiosInstance } from '../instance';
+
+//Axios
 import { AxiosPromise } from 'axios';
 
 export const login = (params: ILoginRequest): AxiosPromise<ILoginResponse> => {
@@ -10,11 +17,9 @@ export const login = (params: ILoginRequest): AxiosPromise<ILoginResponse> => {
 export const refreshToken = (): AxiosPromise<ILoginResponse> => axiosInstance.get(Endpoints.AUTH.REFRESH)
 
 export const logout = (): AxiosPromise<void> => {
-    // return axiosInstance.get(Endpoints.AUTH.LOGOUT);
-    const url = Endpoints.AUTH.LOGOUT; //+ `?_=${Math.random()}`
-    return axiosInstance.get(url);
+    return axiosInstance.get(Endpoints.AUTH.LOGOUT);
 }
 
-// export const getProfile = (): AxiosPromise<string> =>
-//     axiosInstance.get(Endpoints.AUTH.PROFILE);
+export const getProfile = (): AxiosPromise<string> =>
+    axiosInstance.get(Endpoints.AUTH.PROFILE);
 

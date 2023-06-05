@@ -1,14 +1,17 @@
 //React components
-import { FC, useState, useEffect, FormEvent } from "react";
+import React, { FC, useState, useEffect, FormEvent } from "react";
 
 //Next components
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-//Redux
+//Store components
 import { IRootState, useAppDispatch } from "../store";
 import { loginUser } from '@/store/auth/actionCreators';
+
+//Redux components
+import { useSelector } from 'react-redux';
 
 //Formik components
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -19,9 +22,6 @@ import { ILoginRequest } from '../api/auth/types';
 //Validation
 import * as Yup from "yup";
 
-//Pages
-import Dashboard from './Dashboard/Dashboard';
-
 //Styles and images
 import auth from "../styles/Auth&Reg/Authorization.module.css";
 
@@ -29,7 +29,6 @@ import logoWebp from "../assets/img/logo.webp";
 import logoWebp2x from "../assets/img/logo2x.webp";
 import logo from "../assets/img/logo.png";
 import logo2x from "../assets/img/logo2x.png";
-// import { compose } from '@reduxjs/toolkit';
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
@@ -54,19 +53,40 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Authorization: FC = () => {
-    const [error, setError] = useState('');
+    //Ошибка, как состояние из слайса state
+    const error = useSelector((state: IRootState) => state.auth.authData.error);
+
+    // const [accessGet, setAccessGet] = useState(useSelector((state: IRootState) => state.auth.authData.accessToken));
+    const { authData } = useSelector((state: IRootState) => state.auth);
+    const [errorRes, setErrorRes] = useState<string | null>('');
 
     //Хук для получения метода dispatch из ../store
     const dispatch = useAppDispatch();
+
+    //Вызов хука useRouter из next/router
     const router = useRouter();
 
+    //Состояния для полей формы
     const [formValues, setFormValues] = useState<FormValues>({
         username: '',
         password: '',
     });
 
+    //Просмотр изменений error, если измение есть, то устанавливаем error в setErrorRes
+    //Если токен заполнен, то перенаправляем на страницу пользователя
+    useEffect(() => {
+        { error === null && setErrorRes(''); }
+        { error === 'Request failed with status code 401' && setErrorRes('Ошибка: Неверный логин или пароль'); }
+        { error === 'Network Error' && setErrorRes('Ошибка: Нет соединения с сервером'); }
+
+        if (authData.accessToken && !error) {
+            // Если пользователь успешно авторизован, перенаправляем его на страницу Dashboard
+            router.push('/Dashboard/Dashboard');
+        }
+    }, [authData.accessToken, error, router]);
+
+    //Функция отправки формы
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
-        // setError('');
 
         setSubmitting(true);
         // setTimeout(() => {
@@ -79,52 +99,9 @@ const Authorization: FC = () => {
         //     // setSubmitting(false);
         // }, 400);
 
-        // try {
-        //     await dispatch(loginUser(values));
+        await dispatch(loginUser(values));
 
-        //     await router.push('/Dashboard/Dashboard');
-        // } catch (error: any) {
-        //     console.log(error.response);
-
-        //     if (error.response && error.response.status === 401) {
-        //         console.log('1');
-        //         setError('Ошибка: неверный логин или пароль');
-
-        //         // else {
-        //         //     setError('Ошибка: токен доступа устарел или неактивен');
-        //         // }
-        //     } else {
-        //         console.log('2');
-
-        //         setError('Ошибка: не удалось выполнить вход');
-        //     }
-        // }
-
-        try {
-            // const errorMessage = await dispatch(loginUser(values)); // Получаем errorMessage из loginUser
-            // if (errorMessage !== undefined) {
-            //     setError('Произошла ошибка при выполнении запроса'); // Устанавливаем ошибку, если она есть
-            // } else {
-            await dispatch(loginUser(values));
-
-            // const errorMessage = await dispatch(loginUser(values)); // Получаем errorMessage из loginUser
-            // if (errorMessage !== undefined) {
-            //     setError('Произошла ошибка при выполнении запроса'); // Устанавливаем ошибку, если она есть
-            // } else {
-
-            await router.push('/Dashboard/Dashboard');
-            // }
-        } catch (error: any) {
-            console.log(error.response);
-            if (error.response && error.response.status) {
-                setError('Ошибка: неверный логин или пароль');
-            }
-            else {
-                setError('Произошла ошибка при выполнении запроса');
-            }
-        } finally {
-            setSubmitting(false);
-        }
+        setSubmitting(false);
     };
 
     return (
@@ -165,9 +142,9 @@ const Authorization: FC = () => {
                                     />
                                 </picture>
 
-                                {error && (
+                                {errorRes && (
                                     <div className={auth.authForm__errorField}>
-                                        <span className={auth.authForm__errorMessage}>{error}</span>
+                                        <span className={auth.authForm__errorMessage}>{errorRes}</span>
                                     </div>
                                 )}
 
@@ -228,7 +205,6 @@ const Authorization: FC = () => {
                                 <nav className={auth.authForm__nav}>
                                     <span className={auth.authForm__linkText}>У вас нет учетной записи? </span>
                                     <Link href="/Registration" className={auth.authForm__link} title='Перейти на страницу регистрации'>
-                                        {/* Присоединяйтесь&nbsp;к нашему сообществу! */}
                                         Зарегистрируйтесь, чтобы продолжить
                                     </Link>
                                 </nav>
@@ -239,7 +215,6 @@ const Authorization: FC = () => {
                 )}
             </Formik >
 
-            {/* {router.pathname === '/Dashboard/Dashboard' && <Dashboard />} */}
         </>
     )
 }

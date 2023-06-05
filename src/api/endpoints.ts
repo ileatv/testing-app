@@ -2,9 +2,9 @@
 const endpoints = {
     AUTH: {
         LOGIN: '/authenticate',
-        PROFILE: '/profile',
+        PROFILE: '/GetRole',
         LOGOUT: '/logout',
-        REFRESH: '/refresh',
+        REFRESH: '/refreshToken',
     }
 }
 
