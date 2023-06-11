@@ -1,11 +1,11 @@
-import { FC, useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
-import Authorization from './Authorization';
-import Registration from './Registration';
+//React components
+import { FC } from 'react';
+
+//Pages
 import Main from './Main';
+
+//Layout
 import Layout from '@/layouts/layout';
-import { IRootState, useAppDispatch } from "../store";
-// import { getProfile } from "../store/auth/actionCreators";
 
 const Home: FC = () => {
 

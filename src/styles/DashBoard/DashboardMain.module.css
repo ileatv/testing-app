@@ -1,11 +1,104 @@
 .main{
     height: 100%;
     background-color: var(--bg-color);
-    padding: 60px 0;
+    padding: 30px 0;
     border-right: none;
     border-left: none;
+    /* font-family: 'Montserrat', sans-serif; */
 }
 
-.main__content{
-    
+.main__group{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 12px;
+}
+
+.main__title{
+    font-size: 2.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.quizzes{
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    border: 2px solid var(--border-color-dark-blue);
+    border-radius: 24px;
+
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    transform: scale(1);
+    transition: 0.3s all ease-in-out;
+}
+
+.quizzes:hover{
+    transform: scale(1.015);
+}
+
+.quizzes__title{
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.quizzes__title > span{
+    font-weight: 600;
+}
+
+.quizzes__id{
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.quizzes__description{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.updateBtn,
+.quizzes__btn{
+    width: 100%;
+    background-color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 2px solid var(--border-color-dark-blue);
+    border-radius: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-color-white);
+    transition: 0.3s all ease-in-out;
+}
+
+.updateBtn{
+    width: auto;
+    padding: 8px 14px; 
+    margin-bottom: 12px;
+    border-radius: 9999px;
+}
+
+.updateBtn:hover,
+.updateBtn:focus,
+.quizzes__btn:hover,
+.quizzes__btn:focus{
+    background-color: var(--bg-color);
+    color: var(--dark-blue);
 }

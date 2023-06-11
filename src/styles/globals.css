@@ -47,6 +47,7 @@
   --input-focus: var(--blue);
   --input-focus-light: var(--blue-light);
 
+  --border-color-dark-blue: var(--dark-blue);
   --border-color-white: var(--white);
 
   --bg-color: var(--white);

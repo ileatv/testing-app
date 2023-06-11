@@ -1,5 +1,8 @@
 //React components
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
+
+//Axios components
+import axios from 'axios';
 
 //Pages
 import Authorization from './Authorization';

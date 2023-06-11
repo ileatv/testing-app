@@ -1,5 +1,10 @@
+//React components
 import { useState, useEffect } from "react";
+
+//Next Router
 import { useRouter } from "next/router";
+
+//Axios components
 import axios from "axios";
 
 const Quiz = () => {
@@ -33,7 +38,7 @@ const Quiz = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const result = await axios.post(`/api/quizzes/${quiz._id}/results`, answers);
@@ -41,7 +46,7 @@ const Quiz = () => {
         router.push(`/quizzes/${quiz._id}/results/${result.data._id}`);
     };
 
-    if (!quiz) return <div>Loading...</div>;
+    if (!quiz) return <div className={quiz.quiz__loading}>Loading...</div>;
 
     return (
         <div>

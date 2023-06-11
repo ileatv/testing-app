@@ -7,15 +7,17 @@ const QuizList = () => {
 
     useEffect(() => {
         const fetchQuizzes = async () => {
-            const result = await axios.get("/api/quizzes");
+            const result = await axios.get("https://api.pfctngr.ru/GetQuestions");
             setQuizzes(result.data);
         };
+
         fetchQuizzes();
     }, []);
 
     return (
         <div>
-            <h1>Список квизов</h1>
+            <h1>Список тестов</h1>
+
             <ul>
                 {quizzes.map((quiz) => (
                     <li key={quiz._id}>

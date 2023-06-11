@@ -25,12 +25,10 @@ import Authorization from '../Authorization';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 
 //actionCreators components
-import { logoutUser } from '@/store/auth/actionCreators'; //getProfile,
+import { logoutUser, getProfile } from '@/store/auth/actionCreators';
 
 //Styles
 import dash from '../../styles/DashBoard/Dashboard.module.css';
-import axios from 'axios';
-
 
 const Dashboard: FC = () => {
 
@@ -45,6 +43,10 @@ const Dashboard: FC = () => {
         (state: IRootState) => !!state.auth.authData.accessToken
     );
 
+    useEffect(() => {
+        dispatch(getProfile());
+    }, [dispatch]);
+
     const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -56,10 +58,8 @@ const Dashboard: FC = () => {
 
         return (
 
-            //     {/* <button onClick={() => dispatch(getProfile())}>update profile</button> */}
-
             <div className={dash.wrapper}>
-                <DashboardHeader logout={handleLogout} />
+                {/* <DashboardHeader logout={handleLogout} /> */}
                 <DashboardMain />
                 <DashboardFooter />
             </div>

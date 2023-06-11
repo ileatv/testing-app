@@ -1,5 +1,5 @@
 //Axios
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestHeaders } from 'axios';
 
 //Store
 import { store } from "../store";
@@ -31,12 +31,12 @@ axiosInstance.interceptors.request.use(async (config) => {
 
     if (accessToken) {
 
-        config.headers.Authorization = `Bearer ${accessToken}`
-        // const autharization = `Bearer ${accessToken}`
-        // config.headers = {
-        //     ...config.headers,
-        //     Authorization: autharization
-        // }
+        // config.headers.Authorization = `Bearer ${accessToken}`
+        const autharization = `Bearer ${accessToken}`
+        config.headers = {
+            ...config.headers,
+            Authorization: autharization
+        } as AxiosRequestHeaders
     }
 
     return config

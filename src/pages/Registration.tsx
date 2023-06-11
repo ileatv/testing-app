@@ -21,6 +21,7 @@ import axios from 'axios';
 
 //Pages
 import Authorization from '@/pages/Authorization';
+import Quiz from '@/components/Quiz/QuizPage';
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
@@ -29,7 +30,6 @@ type SetSubmitting = (isSubmitting: boolean) => void;
 interface FormValues extends IPerson { }
 
 const Registration: FC = () => {
-    // const [registrationError, setRegistrationError] = useState('');
 
     const [formValues, setFormValues] = useState<FormValues>({
         role: 'role_student',
@@ -70,6 +70,7 @@ const Registration: FC = () => {
     });
 
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
+        setSubmitting(true);
 
         setTimeout(() => {
             //Преобразуем приходящий объект в строку JSON
@@ -78,7 +79,7 @@ const Registration: FC = () => {
             //что форма находится в процессе отправки. В это время пользователь не может отправить форму повторно. 
             //Как только процесс отправки завершен, значение isSubmitting должно быть сброшено обратно на false, 
             //чтобы пользователь мог отправить форму вновь.
-            setSubmitting(false);
+            // setSubmitting(false);
         }, 400);
 
         try {
@@ -88,14 +89,14 @@ const Registration: FC = () => {
                 },
             });
 
-            console.log('Success');
-
             await router.push('/Authorization');
+
             return console.log(response.data);
         } catch (error) {
             console.error(error);
         }
 
+        setSubmitting(false);
     };
 
     return (
@@ -251,9 +252,6 @@ const Registration: FC = () => {
                     </main>
                 )}
             </Formik>
-            {/* {registrationError && <p>{registrationError}</p>} */}
-
-            {/* {router.pathname === '/Authorization' && <Authorization />} */}
         </>
     );
 };

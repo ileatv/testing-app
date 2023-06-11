@@ -12,6 +12,7 @@
 }
 
 .nav__brand{
+    position: relative;
     padding: 0;
     padding-right: 20px;
     margin: 0;
@@ -23,7 +24,24 @@
 
 .nav__brand:hover,
 .nav__brand:focus{
-    color: var(--blue);
+    color: var(--blue-light);
+}
+
+.nav__brand:before {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: var(--link-color-blue);
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    transition: 0.3s all ease-in-out;
+}
+
+.nav__brand:hover::before,
+.nav__brand:focus::before {
+    width: 102.05px;
 }
 
 .nav__link{
@@ -85,6 +103,10 @@
     font-size: 1rem;
     vertical-align: middle;
     transition: 0.5s all ease-in-out;
+}
+
+.search__input::-webkit-input-placeholder{
+    color: var(--text-color-white);
 }
 
 .search__input:focus {

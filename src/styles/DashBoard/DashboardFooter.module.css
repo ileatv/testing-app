@@ -27,7 +27,7 @@
 
 .footer__link:hover,
 .footer__link:focus {
-    color: var(--link-color-blue);
+    color: var(--link-color);
 }
 
 .footer__link:before {

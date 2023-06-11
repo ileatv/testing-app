@@ -13,9 +13,10 @@ import dashHeader from '../../styles/Dashboard/DashboardHeader.module.css';
 
 interface DashboardHeaderProps {
     logout: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+    profile: string | null;
 }
 
-const DashboardHeader: FC<DashboardHeaderProps> = ({ logout }) => {
+const DashboardHeader: FC<DashboardHeaderProps> = ({ logout, profile }) => {
     const [visible, setVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -37,14 +38,14 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({ logout }) => {
                                 </CNavbarBrand>
 
                                 <CNavItem>
-                                    <CNavLink href="/Dashboard/Dashboard" active={router.pathname === '/Dashboard/Dashboard'} title='Перейти на главную' className={`${dashHeader.nav__link} ${dashHeader.nav__link_active} ${router.pathname === '/Dashboard/Dashboard' ? 'active' : `${dashHeader.nav__link}`}`}>
+                                    <CNavLink href='/UserPages/StudentPage' active={router.pathname === '/UserPages/StudentPage'} title='Перейти на главную' className={`${dashHeader.nav__link} ${dashHeader.nav__link_active} ${router.pathname === '/Dashboard/Dashboard' ? 'active' : `${dashHeader.nav__link}`}`}>
                                         Главная
                                     </CNavLink>
                                 </CNavItem>
 
                                 <CNavItem>
                                     <CNavLink href="/Dashboard/Users" active={router.pathname === '/Users'} title='Перейти к таблице пользователей' className={dashHeader.nav__link}>
-                                        Пользователи
+                                        Пользователям
                                     </CNavLink>
                                 </CNavItem>
 
@@ -70,7 +71,11 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({ logout }) => {
 
                                 <CDropdown variant="nav-item" popper={false} className={dashHeader.user}>
                                     <CDropdownToggle onClick={toggle} className={dashHeader.nav__link} title='Раскрыть меню пользователя'>
-                                        <CAvatar status="success" className={dashHeader.user__avatar}>ADM</CAvatar>
+                                        <CAvatar status="success" className={dashHeader.user__avatar}>
+                                            {profile === "role_admin" && "ADM"}
+                                            {profile === "role_teacher" && "TEACH"}
+                                            {profile === "role_student" && "STUD"}
+                                        </CAvatar>
                                     </CDropdownToggle>
 
                                     <CDropdownMenu className={dashHeader.dropdownList}>
@@ -79,9 +84,9 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({ logout }) => {
                                         </CDropdownItem>
                                         <CDropdownDivider className={dashHeader.dropdownList__divider} />
                                         <CDropdownItem className={dashHeader.dropdownList__item}>
-                                            <CButton type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта' onClick={logout}>
+                                            <button type="button" className={`${dashHeader.user__btn}`} title='Выйти из аккаунта' onClick={logout}>
                                                 Выйти
-                                            </CButton>
+                                            </button>
                                         </CDropdownItem>
                                     </CDropdownMenu>
                                 </CDropdown>

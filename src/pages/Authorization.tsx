@@ -1,5 +1,5 @@
 //React components
-import React, { FC, useState, useEffect, FormEvent } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 //Next components
 import Head from 'next/head';
@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 //Store components
 import { IRootState, useAppDispatch } from "../store";
-import { loginUser } from '@/store/auth/actionCreators';
+import { getProfile, loginUser } from '@/store/auth/actionCreators';
 
 //Redux components
 import { useSelector } from 'react-redux';
@@ -29,6 +29,7 @@ import logoWebp from "../assets/img/logo.webp";
 import logoWebp2x from "../assets/img/logo2x.webp";
 import logo from "../assets/img/logo.png";
 import logo2x from "../assets/img/logo2x.png";
+import axios from 'axios';
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
@@ -55,9 +56,12 @@ const LoginSchema = Yup.object().shape({
 const Authorization: FC = () => {
     //Ошибка, как состояние из слайса state
     const error = useSelector((state: IRootState) => state.auth.authData.error);
-
+    const profile = useSelector(
+        (state: IRootState) => state.auth.profileData.profile
+    );
     // const [accessGet, setAccessGet] = useState(useSelector((state: IRootState) => state.auth.authData.accessToken));
     const { authData } = useSelector((state: IRootState) => state.auth);
+
     const [errorRes, setErrorRes] = useState<string | null>('');
 
     //Хук для получения метода dispatch из ../store
@@ -80,10 +84,22 @@ const Authorization: FC = () => {
         { error === 'Network Error' && setErrorRes('Ошибка: Нет соединения с сервером'); }
 
         if (authData.accessToken && !error) {
-            // Если пользователь успешно авторизован, перенаправляем его на страницу Dashboard
-            router.push('/Dashboard/Dashboard');
+
+            switch (profile) {
+                case "role_admin":
+                    router.push('/UserPages/AdminPage');
+                    break;
+                case "role_teacher":
+                    router.push('/UserPages/TeacherPage');
+                    break;
+                case "role_student":
+                    router.push('/UserPages/StudentPage');
+                    break;
+                case "unauthorized":
+                    router.push('/Authorization');
+            }
         }
-    }, [authData.accessToken, error, router]);
+    }, [authData.accessToken, error, profile, router]);
 
     //Функция отправки формы
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {

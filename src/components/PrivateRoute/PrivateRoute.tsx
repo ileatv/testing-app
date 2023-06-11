@@ -19,6 +19,7 @@ interface PrivateRouteProps {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
     const router = useRouter();
+
     const isLoggedIn = useSelector(
         (state: IRootState) => !!state.auth.authData.accessToken
     );
@@ -27,6 +28,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
         if (!isLoggedIn) {
             router.push('/Authorization');
         }
+
     }, [isLoggedIn, router]);
 
     return (
