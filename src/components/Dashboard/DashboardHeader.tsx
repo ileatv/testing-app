@@ -50,7 +50,7 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({ logout, profile }) => {
                                 </CNavItem>
 
                                 <CDropdown variant="nav-item" popper={false}>
-                                    <CDropdownToggle className={dashHeader.nav__link}>Dropdown button</CDropdownToggle>
+                                    <CDropdownToggle className={dashHeader.nav__link}>Действия</CDropdownToggle>
 
                                     <CDropdownMenu className={dashHeader.dropdownList}>
                                         <CDropdownItem href="#" className={dashHeader.dropdownList__item}>Action</CDropdownItem>

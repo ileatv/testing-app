@@ -1,0 +1,225 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main__content{
+    width: 1400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav{
+    width: 100%;
+    padding: 26px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    color: var(--text-color-white);
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.nav__questionCounter{
+    margin-right: 55px;
+    margin-bottom: 0;
+}
+
+.nav__timer{
+    margin-bottom: 0;
+}
+
+.nav__links{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 10px;
+    margin-right: auto;
+}
+
+.nav__link{
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    transition: 0.3s all ease-in-out;
+}
+
+.nav__link:hover,
+.nav__link:focus{
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+}
+
+.nav__link_active{
+    border-color: var(--green-light);
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.form__content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.form__title,
+.form__label{
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--border-color-dark-gray);
+    border-radius: 10px;
+    margin-bottom: 60px;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.form__answers{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap: 20px;
+}
+
+.form__answer{
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 30px;
+}
+
+.form__label{
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.form__checkbox:checked ~ .form__label{
+    border-color: var(--green-light);
+}
+
+.form__checkbox{
+    width: 20px;
+    height: 20px;
+}
+
+.footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 26px 40px;
+    margin-top: auto;
+}
+
+.footer__answerBtn{
+    margin-right: 80px;
+}
+
+.footer__answerBtn,
+.footer__finishBtn{
+    background-color: transparent;
+    padding: 8px 24px;
+    border: 2px solid var(--border-color-white);
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color-white);
+    transition: 0.3s all ease-in-out;
+}
+
+.footer__answerBtn:hover,
+.footer__finishBtn:hover,
+.footer__answerBtn:focus,
+.footer__finishBtn:focus{
+    background-color: var(--green-light);
+    /* color: var(--text-color); */
+}
+
+.footer__group{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 20px;
+    margin-right: auto;
+}
+
+.footer__prevBtn,
+.footer__nextBtn{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid var(--border-color-white);
+    border-radius: 50%;
+    transition: 0.3s all ease-in-out;
+}
+
+.footer__prevBtn::before,
+.footer__nextBtn::before,
+.footer__prevBtn::after,
+.footer__nextBtn::after{
+    position: absolute;
+    content: "";
+    background-color: var(--border-color-white);
+    height: 2px;
+    width: 13px;
+    /* top: 0;
+    left: 0; */
+    border-radius: 2px;
+}
+
+.footer__prevBtn::before{
+    top: calc(50% - 4px);
+    left: calc(50% - 8px);
+    /* top: 11px;
+    left: 13px; */
+    transform: rotate(135deg);
+}
+
+.footer__prevBtn::after {
+    top: calc(50% + 4px);
+    left: calc(50% - 8px);
+    /* top: 18.5px;
+    left: 13px; */
+    transform: rotate(45deg);
+}
+
+.footer__nextBtn::before {
+    top: calc(50% - 4px);
+    right: calc(50% - 8px);
+    transform: rotate(45deg);
+}
+
+.footer__nextBtn::after {
+    top: calc(50% + 4px);
+    right: calc(50% - 8px);
+    transform: rotate(135deg);
+}
+
+.footer__prevBtn:hover,
+.footer__nextBtn:hover,
+.footer__prevBtn:focus,
+.footer__nextBtn:focus{
+    background-color: var(--green-light);
+}

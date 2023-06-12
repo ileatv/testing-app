@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 
 //Next components
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 //Store components
 import { IRootState, useAppDispatch } from '@/store';
@@ -65,6 +66,9 @@ export const StudentPage: FC = () => {
 
     return (
         <>
+            <Head>
+                <title>Testing App - Страница студента</title>
+            </Head>
             {isLoggedIn ? renderHandler() : <Authorization />}
         </>
     )

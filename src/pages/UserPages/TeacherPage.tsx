@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 
 //Next components
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 //Store components
 import { IRootState, useAppDispatch } from '@/store';
@@ -63,6 +64,10 @@ export const TeacherPage: FC = () => {
 
     return (
         <>
+            <Head>
+                <title>Testing App - Страница преподавателя</title>
+            </Head>
+
             {isLoggedIn ? renderHandler() : <Authorization />}
         </>
     )

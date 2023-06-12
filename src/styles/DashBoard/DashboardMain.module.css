@@ -44,6 +44,13 @@
     transform: scale(1.015);
 }
 
+.quizzes__subtext{
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
 .quizzes__title{
     font-size: 1.5rem;
     line-height: 1.5;

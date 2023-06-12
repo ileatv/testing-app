@@ -105,15 +105,15 @@ const Authorization: FC = () => {
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
 
         setSubmitting(true);
-        // setTimeout(() => {
-        //     //Преобразуем приходящий объект в строку JSON
-        //     alert(JSON.stringify(values, null, 2));
-        //     //Когда пользователь отправляет форму, Formik устанавливает значение isSubmitting в true, чтобы указать, 
-        //     //что форма находится в процессе отправки. В это время пользователь не может отправить форму повторно. 
-        //     //Как только процесс отправки завершен, значение isSubmitting должно быть сброшено обратно на false, 
-        //     //чтобы пользователь мог отправить форму вновь.
-        //     // setSubmitting(false);
-        // }, 400);
+        setTimeout(() => {
+            //Преобразуем приходящий объект в строку JSON
+            alert(JSON.stringify(values, null, 2));
+            //Когда пользователь отправляет форму, Formik устанавливает значение isSubmitting в true, чтобы указать, 
+            //что форма находится в процессе отправки. В это время пользователь не может отправить форму повторно. 
+            //Как только процесс отправки завершен, значение isSubmitting должно быть сброшено обратно на false, 
+            //чтобы пользователь мог отправить форму вновь.
+            // setSubmitting(false);
+        }, 400);
 
         await dispatch(loginUser(values));
 
