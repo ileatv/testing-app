@@ -12,82 +12,96 @@ import { useRouter } from 'next/router';
 
 //Dashboard components and styles
 import dashMain from '../../styles/DashBoard/DashboardMain.module.css';
-import QuizPage from '@/pages/Quiz/QuizPage';
+import QuizPage from '@/pages/Quizzes/Questions/[Question]';
 
-//Types
-import { QuizData } from '@/pages/Quiz/types';
+// import type { GetServerSideProps } from 'next';
 
+// type QuizProps = {
+//     quizzes: QuizData;
+// }
 
-const DashboardMain: FC = () => {
+// export const getServerSideProps: GetServerSideProps<QuizProps> = async () => {
+//     try {
+//         const result = await axios.post<QuizData>(
+//             'https://api.pfctngr.ru/test/GetQuestions',
+//             2,
+//             {
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//             }
+//         );
 
-    //Тестирование запроса на получение теста
-    const [quizzes, setQuizzes] = useState<QuizData>();
-    // const [showQuizPage, setShowQuizPage] = useState(false);
+//         return {
+//             props: {
+//                 quizzes: result.data,
+//             },
+//         };
+//     } catch (error) {
+//         console.log(error);
 
-    const router = useRouter();
+//         return {
+//             props: {
+//                 quizzes: null,
+//             },
+//         };
+//     }
+// };
 
-    const fetchQuizzes = async () => {
-        try {
-            const result = await axios.post<QuizData>(
-                "https://api.pfctngr.ru/test/GetQuestions", 2, {
+type MainProps = {
+    children: React.ReactNode;
+};
 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+const DashboardMain: FC<MainProps> = ({ children }) => {
 
-            // setQuizzes(result.data);
-            return setQuizzes(result.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // //Тестирование запроса на получение теста
+    // const [quizzes, setQuizzes] = useState<QuizData>();
+    // const [questions, setQuestions] = useState<Questions[]>();
 
-    const handlerGetQuizzes = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    // const router = useRouter();
 
-        await fetchQuizzes();
-        console.log(quizzes?.responseEntities);
-        // setShowQuizPage(true);
-    }
+    // const fetchQuizzes = async () => {
+    //     try {
+    //         const result = await axios.post<QuizData>(
+    //             "https://api.pfctngr.ru/test/GetQuestions", 2, {
 
-    const routerHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         });
 
-        router.push('/Quiz/QuizPage');
-    }
+    //         setQuizzes(result.data);
+    //         setQuestions(result.data.responseEntities);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    // const handlerGetQuizzes = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    //     e.preventDefault();
+    //     fetchQuizzes();
+    // }
+
+    // const routerHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //     e.preventDefault();
+    //     console.log(quizzes);
+    //     console.log(questions);
+    //     router.push({
+    //         // pathname: `/Quizzes/Questions/${questions?.map(question => question.id)}`,
+    //         pathname: `/Quizzes/Questions/${questions?.filter(question => question.id === 1)}`,
+    //         query: { questions: JSON.stringify(questions?.filter(question => question.id === 1)) },
+    //     });
+    // }
 
     return (
         <>
             <main className={dashMain.main}>
                 <CContainer fluid>
                     <section className={dashMain.main__content}>
-                        <div className={dashMain.main__group}>
-                            <h1 className={dashMain.main__title}>Доступные тестовые задания</h1>
-                            <button type="button" className={dashMain.updateBtn} onClick={handlerGetQuizzes} title='Получить доступные тестовые задания для выполнения'>
-                                Обновить список
-                            </button>
-                        </div>
-
-                        {
-                            quizzes ? (
-                                <div className={dashMain.quizzes}>
-
-                                    <h3 className={dashMain.quizzes__title}>
-                                        Тема: <span>{quizzes?.testName}</span>
-                                    </h3>
-
-                                    <p className={dashMain.quizzes__description}>В данном тестировании вы можете проверить свои познания в области объектно-ориентированного программирования...</p>
-
-                                    <button type="button" className={dashMain.quizzes__btn} onClick={routerHandler} title={`Начать тестирование по теме "${quizzes?.testName}"`}>Начать тестирование</button>
-                                </div>
-                            ) : <h2 className={dashMain.quizzes__subtext}>Пока нет доступных тестовых заданий :(</h2>
-                        }
+                        {children}
                     </section>
                 </CContainer>
             </main>
-
-            {router.pathname === '/Quiz/QuizPage' && <QuizPage questions={quizzes?.responseEntities} />}
         </>
     )
 }

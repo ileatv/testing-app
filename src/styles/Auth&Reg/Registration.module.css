@@ -4,6 +4,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-family: "Montserrat", serif;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .regForm {
@@ -97,10 +101,12 @@
     border: 2px solid var(--dark-gray);
     border-radius: 10px;
     margin-top: 50px;
+
     color: var(--dark-gray);
     font-weight: 500;
-    font-size: 24px;
+    font-size: 1.5rem;
     cursor: pointer;
+
     transition: 0.3s all ease-in-out;
 }
 
@@ -123,6 +129,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 25px;
+
     font-size: 1rem;
     text-align: center;
     line-height: 1.5;

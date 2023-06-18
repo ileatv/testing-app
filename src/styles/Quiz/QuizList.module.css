@@ -1,0 +1,108 @@
+.quizzes{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.quizzes__group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 12px;
+}
+
+.quizzes__title {
+    font-size: 2.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.quiz {
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    border: 2px solid var(--border-color-dark-blue);
+    border-radius: 24px;
+
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    transform: scale(1);
+    transition: 0.3s all ease-in-out;
+}
+
+.quiz:hover {
+    transform: scale(1.015);
+}
+
+.quiz__subtext {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.quiz__title {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.quiz__title>span {
+    font-weight: 600;
+}
+
+.quiz__id {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.quiz__description {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.updateBtn,
+.quiz__btn {
+    width: 100%;
+    background-color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 2px solid var(--border-color-dark-blue);
+    border-radius: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-color-white);
+    transition: 0.3s all ease-in-out;
+}
+
+.updateBtn {
+    width: auto;
+    padding: 8px 14px;
+    margin-bottom: 12px;
+    border-radius: 9999px;
+}
+
+.updateBtn:hover,
+.updateBtn:focus,
+.quiz__btn:hover,
+.quiz__btn:focus {
+    background-color: var(--bg-color);
+    color: var(--dark-blue);
+}

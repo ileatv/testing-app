@@ -1,18 +1,18 @@
-export type Option = {
+export type Options = {
     id: number;
     optionText: string;
     right: boolean;
 };
 
-export type Question = {
+export type Questions = {
     id: number;
     questionText: string;
     questionCost: number;
-    responseEntityOptions: Option[];
+    responseEntityOptions: Options[];
 };
 
 export type QuizData = {
     id: number;
     testName: string;
-    responseEntities: Question[];
+    responseEntities: Questions[];
 };

@@ -4,6 +4,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-family: "Montserrat", serif;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .authForm {
@@ -74,6 +78,7 @@
     position: absolute;
     top: 0;
     left: 0;
+
     color: var(--red);
     font-size: 1rem;
     font-weight: 600;
@@ -89,9 +94,11 @@
     border: 2px solid var(--dark-gray);
     border-radius: 10px;
     margin-top: 50px;
+
     color: var(--dark-gray);
     font-weight: 500;
-    font-size: 24px;
+    font-size: 1.5rem;
+
     cursor: pointer;
     transition: 0.3s all ease-in-out;
 }
@@ -114,19 +121,24 @@
     height: 100%;
 }
 
-.authForm__errorField{
+.authForm__errorField,
+.authForm__successField{
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 270px;
-    /* left: 0; */
 }
 
-.authForm__errorMessage{
+.authForm__errorMessage,
+.authForm__successMessage{
     color: var(--red);
     font-size: 1rem;
     font-weight: 600;
+}
+
+.authForm__successMessage{
+    color: var(--green-light);
 }
 
 .authForm__nav{
@@ -135,6 +147,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 25px;
+
     font-size: 1rem;
     text-align: center;
     line-height: 1.5;
@@ -146,7 +159,7 @@
 }
 
 .authForm__link{
-    position: relative;
+    position: relative;    
     color: var(--link-color-blue);
     font-weight: 600;
     text-decoration: none;

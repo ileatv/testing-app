@@ -7,68 +7,33 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 //Types
-import { Option, Question } from "./types";
+import { Options, Questions, QuizData } from "../types";
 
 //Styles
 import quiz from '../../styles/Quiz/QuizPage.module.css';
 
-interface QuizPageProps {
-    questions: Question[] | undefined;
-}
-
-const QuizPage: FC<QuizPageProps> = ({ questions }) => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [score, setScore] = useState(0);
-    const [remainingTime, setRemainingTime] = useState(30 * 60); // 30 минут в секундах
+const Question: FC = () => {
     const router = useRouter();
+    const questionsFromQuery = JSON.parse(router.query.questions as string);
 
-    // if (questions === undefined) {
-    //     return <div>Загрузка...</div>
-    // }
-    // else {
-    // console.log("Lolol" + (questions[currentQuestionIndex].id === 1));
-    // }
+    const [questions, setQuestions] = useState<Questions[]>(questionsFromQuery);
 
-    // const currentQuestion = questions[currentQuestionIndex];
-
-    // const handleAnswer = (isRight: boolean) => {
-    //     if (isRight) {
-    //         setScore(score + currentQuestion.questionCost);
-    //     }
-
-    //     if (currentQuestionIndex < questions.length - 1) {
-    //         setCurrentQuestionIndex(currentQuestionIndex + 1);
-    //     } else {
-    //         // Код для завершения тестирования
-    //         console.log(`Тестирование завершено. Вы набрали ${score} баллов.`);
-    //     }
-    // };
+    console.log(questions);
 
     useEffect(() => {
-        const timerId = setInterval(() => {
-            setRemainingTime(prevTime => prevTime - 1);
-        }, 1000);
-        return () => clearInterval(timerId);
-    }, []); // запустить таймер один раз при монтировании компонента
+        setQuestions(questionsFromQuery);
+    }, [questionsFromQuery]);
 
-    useEffect(() => {
-        if (remainingTime === 0) {
-            console.log(`Время вышло! Вы набрали ${score} баллов.`);
-        }
-    }, [remainingTime, score]);
-
-    const formatTime = (timeInSeconds: number) => {
-        const minutes = Math.floor(timeInSeconds / 60);
-        const seconds = timeInSeconds % 60;
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    };
-
-    const finishHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        router.push('/UserPages/StudentPage');
-    }
+    console.log("Лист вопросов:", questions);
 
     return (
         <>
+            <ul>
+                {questions.map((item, id) => (
+                    <li key={id}>{item.questionText}</li>
+                ))}
+            </ul>
+
             {/* <h1>{currentQuestion.questionText}</h1>
             <ul>
                 {currentQuestion.responseEntityOptions.map((option) => (
@@ -79,11 +44,11 @@ const QuizPage: FC<QuizPageProps> = ({ questions }) => {
                     </li>
                 ))}
             </ul> */}
-            <Head>
+            {/* <Head>
                 <title>Testing App - Тестирование</title>
-            </Head>
+            </Head> */}
 
-            <main className={quiz.main}>
+            {/* <main className={quiz.main}>
                 <div className={quiz.main__content}>
                     <nav className={quiz.nav}>
                         <p className={quiz.nav__questionCounter}>Вопрос 1 из 6</p>
@@ -139,9 +104,9 @@ const QuizPage: FC<QuizPageProps> = ({ questions }) => {
                         <button type='button' title='Завершить тестирование' className={quiz.footer__finishBtn} onClick={finishHandler}>Завершить работу</button>
                     </footer>
                 </div>
-            </main>
+            </main> */}
         </>
     )
 }
 
-export default QuizPage;
+export default Question;

@@ -21,6 +21,9 @@ import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import DashboardMain from '@/components/Dashboard/DashboardMain';
 import DashboardFooter from '@/components/Dashboard/DashboardFooter';
 
+//QuizList
+import QuizList from '@/components/Quiz/QuizList';
+
 //Styles
 import dash from '../../styles/DashBoard/Dashboard.module.css';
 
@@ -39,10 +42,10 @@ export const StudentPage: FC = () => {
     useEffect(() => {
         dispatch(getProfile());
 
-        if (!isLoggedIn) {
+        if (!isLoggedIn || profile === "unauthorized") {
             router.push('/Authorization');
         }
-    }, [dispatch, isLoggedIn, router]);
+    }, [dispatch, isLoggedIn, profile, router]);
 
     const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -58,7 +61,9 @@ export const StudentPage: FC = () => {
 
             <div className={dash.wrapper}>
                 <DashboardHeader logout={logoutHandler} profile={profile} />
-                <DashboardMain />
+                <DashboardMain>
+                    <QuizList />
+                </DashboardMain>
                 <DashboardFooter />
             </div>
         )

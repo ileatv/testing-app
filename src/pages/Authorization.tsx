@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 //Store components
 import { IRootState, useAppDispatch } from "../store";
-import { getProfile, loginUser } from '@/store/auth/actionCreators';
+import { loginUser } from '@/store/auth/actionCreators';
 
 //Redux components
 import { useSelector } from 'react-redux';
@@ -29,7 +29,6 @@ import logoWebp from "../assets/img/logo.webp";
 import logoWebp2x from "../assets/img/logo2x.webp";
 import logo from "../assets/img/logo.png";
 import logo2x from "../assets/img/logo2x.png";
-import axios from 'axios';
 
 //Типизация setSubmitting
 type SetSubmitting = (isSubmitting: boolean) => void;
@@ -54,12 +53,12 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Authorization: FC = () => {
+
     //Ошибка, как состояние из слайса state
     const error = useSelector((state: IRootState) => state.auth.authData.error);
     const profile = useSelector(
         (state: IRootState) => state.auth.profileData.profile
     );
-    // const [accessGet, setAccessGet] = useState(useSelector((state: IRootState) => state.auth.authData.accessToken));
     const { authData } = useSelector((state: IRootState) => state.auth);
 
     const [errorRes, setErrorRes] = useState<string | null>('');
@@ -70,11 +69,23 @@ const Authorization: FC = () => {
     //Вызов хука useRouter из next/router
     const router = useRouter();
 
+    const [showSuccess, setShowSuccess] = useState<boolean>(false);
+
     //Состояния для полей формы
     const [formValues, setFormValues] = useState<FormValues>({
         username: '',
         password: '',
     });
+
+    useEffect(() => {
+        const success = router.query.registration_success;
+
+        if (success) {
+            setShowSuccess(true);
+            const timeoutId = setTimeout(() => setShowSuccess(false), 5000);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [router.query.registration_success]);
 
     //Просмотр изменений error, если измение есть, то устанавливаем error в setErrorRes
     //Если токен заполнен, то перенаправляем на страницу пользователя
@@ -87,13 +98,13 @@ const Authorization: FC = () => {
 
             switch (profile) {
                 case "role_admin":
-                    router.push('/UserPages/AdminPage');
+                    router.push('/Users/Admin');
                     break;
                 case "role_teacher":
-                    router.push('/UserPages/TeacherPage');
+                    router.push('/Users/Teacher');
                     break;
                 case "role_student":
-                    router.push('/UserPages/StudentPage');
+                    router.push('/Users/Student');
                     break;
                 case "unauthorized":
                     router.push('/Authorization');
@@ -105,15 +116,6 @@ const Authorization: FC = () => {
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
 
         setSubmitting(true);
-        setTimeout(() => {
-            //Преобразуем приходящий объект в строку JSON
-            alert(JSON.stringify(values, null, 2));
-            //Когда пользователь отправляет форму, Formik устанавливает значение isSubmitting в true, чтобы указать, 
-            //что форма находится в процессе отправки. В это время пользователь не может отправить форму повторно. 
-            //Как только процесс отправки завершен, значение isSubmitting должно быть сброшено обратно на false, 
-            //чтобы пользователь мог отправить форму вновь.
-            // setSubmitting(false);
-        }, 400);
 
         await dispatch(loginUser(values));
 
@@ -161,6 +163,12 @@ const Authorization: FC = () => {
                                 {errorRes && (
                                     <div className={auth.authForm__errorField}>
                                         <span className={auth.authForm__errorMessage}>{errorRes}</span>
+                                    </div>
+                                )}
+
+                                {showSuccess && (
+                                    <div className={auth.authForm__successField}>
+                                        <span className={auth.authForm__successMessage}>Регистрация прошла успешно</span>
                                     </div>
                                 )}
 

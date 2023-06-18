@@ -58,7 +58,6 @@ const Registration: FC = () => {
         password: Yup.string()
             .required('Пароль обязателен к заполнению')
             .matches(
-                // /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
                 /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
                 'Пароль должен содержать не менее 8 символов, включая как минимум одну заглавную букву, цифру и специальный символ, например: !@#$%^&*'
             ),
@@ -73,26 +72,21 @@ const Registration: FC = () => {
     const handleSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: SetSubmitting }) => {
         setSubmitting(true);
 
-        setTimeout(() => {
-            //Преобразуем приходящий объект в строку JSON
-            alert(JSON.stringify(values, null, 2));
-            //Когда пользователь отправляет форму, Formik устанавливает значение isSubmitting в true, чтобы указать, 
-            //что форма находится в процессе отправки. В это время пользователь не может отправить форму повторно. 
-            //Как только процесс отправки завершен, значение isSubmitting должно быть сброшено обратно на false, 
-            //чтобы пользователь мог отправить форму вновь.
-            // setSubmitting(false);
-        }, 400);
-
         try {
-            const response = await axios.post('https://api.pfctngr.ru/register', values, {
+            const request = await axios.post('https://api.pfctngr.ru/register', values, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
 
-            await router.push('/Authorization');
+            if (request.status === 200) {
+                await router.push({
+                    pathname: "/Authorization",
+                    query: { registration_success: true },
+                });
+            }
 
-            return console.log(response.data);
+            // return console.log(request.data);
         } catch (error) {
             console.error(error);
         }
