@@ -47,8 +47,9 @@ const QuizList = () => {
         console.log(questions);
         router.push({
             // pathname: `/Quizzes/Questions/${questions?.map(question => question.id)}`,
-            pathname: `/Quizzes/Questions/${questions?.filter(question => question.id === 1)}`,
-            query: { questions: JSON.stringify(questions?.filter(question => question.id === 1)) },
+            pathname: `/Quizzes/Questions/Question`,
+            // query: { questions: JSON.stringify(questions?.filter(question => question.id === 1)) },
+            // query: { questions: JSON.stringify(questions) },
         });
     }
 

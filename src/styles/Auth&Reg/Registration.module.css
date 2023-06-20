@@ -61,15 +61,17 @@
     width: 100%;
     height: 60px;
     padding: 18px 20px;
-    border: 2px solid var(--dark-gray);
+    border: 3px solid var(--dark-gray);
     border-radius: 10px;
+    outline: 4px solid transparent;
     font-size: 1.25rem;
+    font-weight: 500;
     transition: 0.3s all ease-in-out;
 }
 
 .regForm__input:focus {
     border-color: transparent;
-    box-shadow: 0 0 0 0.2rem var(--input-focus);
+    outline-color: var(--focus-color);
 }
 
 .regForm__input_error {
@@ -98,8 +100,9 @@
     background-color: transparent;
     width: 100%;
     height: 60px;
-    border: 2px solid var(--dark-gray);
+    border: 3px solid var(--dark-gray);
     border-radius: 10px;
+    outline: 4px solid transparent;
     margin-top: 50px;
 
     color: var(--dark-gray);
@@ -110,10 +113,15 @@
     transition: 0.3s all ease-in-out;
 }
 
-.regForm__btn:hover,
-.regForm__btn:focus {
+.regForm__btn:hover{
     background-color: var(--dark-gray);
     color: var(--white);
+}
+
+.regForm__btn:focus{
+    background-color: var(--dark-gray);
+    color: var(--white);
+    outline-color: var(--focus-color);
 }
 
 .regForm__logo {
@@ -160,7 +168,7 @@
     background-color: var(--link-hover);
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 2px;
     width: 0%;
     transition: 0.3s all ease-in-out;
 }

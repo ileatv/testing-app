@@ -31,8 +31,9 @@
     background-color: transparent;
     width: 400px;
     height: 60px;
-    border: 2px solid var(--dark-gray);
+    border: 3px solid var(--dark-gray);
     border-radius: 10px;
+    outline: 4px solid transparent;
 
     color: var(--dark-gray);
     font-weight: 500;
@@ -43,10 +44,15 @@
     transition: 0.3s all ease-in-out;
 }
 
-.nav__link:hover,
+.nav__link:hover{
+    background-color: var(--dark-gray);
+    color: var(--white);
+}
+
 .nav__link:focus{
     background-color: var(--dark-gray);
     color: var(--white);
+    outline-color: var(--focus-color);
 }
 
 .nav__picture {
